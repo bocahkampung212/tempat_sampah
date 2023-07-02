@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:penjemputan_sampah/providers/Informasi.dart';
 import 'package:penjemputan_sampah/providers/dashbord_providers.dart';
+
+import 'package:penjemputan_sampah/providers/profil_panel_providers.dart';
 import 'package:provider/provider.dart';
 
 class Dashbord extends StatelessWidget {
@@ -9,15 +11,13 @@ class Dashbord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<dashbordprovider>(builder: (context, Provider, Widget) {
+    final panels = [dashbordPanel(), tombolMenu(), SizedBox()];
+    return Consumer<dashbordprovider>(builder: (context, provider, widget) {
       return Scaffold(
-          bottomNavigationBar: navigatorBawah(),
-          backgroundColor: Color.fromRGBO(72, 238, 130, 1),
-          body: Provider.indexTombol == 0
-              ? dashbordPanel()
-              : Provider.indexTombol == 1
-                  ? tombolMenu()
-                  : SizedBox());
+        backgroundColor: Color.fromARGB(255, 86, 241, 156),
+        bottomNavigationBar: navigatorBawah(),
+        body: panels[provider.indexTombol],
+      );
     });
   }
 }
@@ -222,25 +222,22 @@ class navigatorBawah extends StatelessWidget {
         p.saatdiklik(value);
       },
       items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
         BottomNavigationBarItem(
             icon: Icon(Icons.settings), label: 'pengaturan'),
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-        BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'profil'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_box),
+          label: 'profil',
+        ),
       ],
     );
   }
 
   Widget inistate(BuildContext context) {
     return BottomNavigationBar(items: [
-      BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Pengaturan'),
       BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      BottomNavigationBarItem(
-        icon: Image.asset(
-          'assets/user.PNG',
-          width: 10,
-        ),
-        label: 'profil',
-      )
+      BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Pengaturan'),
+      BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'profil'),
     ]);
   }
 }
