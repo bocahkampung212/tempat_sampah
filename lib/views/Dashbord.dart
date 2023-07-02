@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:penjemputan_sampah/providers/Informasi.dart';
 import 'package:penjemputan_sampah/providers/dashbord_providers.dart';
 
-import 'package:penjemputan_sampah/providers/profil_panel_providers.dart';
+import 'package:penjemputan_sampah/providers/profil_panel.dart';
+import 'package:penjemputan_sampah/providers/setting_panel_.dart';
 import 'package:provider/provider.dart';
 
 class Dashbord extends StatelessWidget {
@@ -11,10 +12,10 @@ class Dashbord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final panels = [dashbordPanel(), tombolMenu(), SizedBox()];
+    final panels = [dashbordPanel(), Settingpanel(), profilpanel()];
     return Consumer<dashbordprovider>(builder: (context, provider, widget) {
       return Scaffold(
-        backgroundColor: Color.fromARGB(255, 86, 241, 156),
+        backgroundColor: Color.fromARGB(255, 70, 230, 142),
         bottomNavigationBar: navigatorBawah(),
         body: panels[provider.indexTombol],
       );
@@ -226,7 +227,7 @@ class navigatorBawah extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.settings), label: 'pengaturan'),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_box),
+          icon: Icon(Icons.person),
           label: 'profil',
         ),
       ],
