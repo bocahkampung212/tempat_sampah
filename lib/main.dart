@@ -1,11 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:penjemputan_sampah/views/login_view.dart';
-import 'package:penjemputan_sampah/views/registrasi.dart';
-import 'package:penjemputan_sampah/views/Dashbord.dart';
-import 'package:penjemputan_sampah/providers/informasi.dart';
 
-void main(List<String> args) {
-  runApp(const MaterialApp(
-    home: LoginView(),
+
+import 'package:flutter/material.dart';
+import 'package:penjemputan_sampah/providers/dashbord_providers.dart';
+import 'package:penjemputan_sampah/views/login_view.dart';
+import 'package:provider/provider.dart';
+
+main(List<String> args) {
+  runApp(MultiProvider(builder: (context, Widget) {
+    return const MaterialApp(
+      home: LoginView(),
+    );
+  }, providers: [
+    ChangeNotifierProvider(create: (c)=>dashbordprovider())
+  ],
   ));
 }
